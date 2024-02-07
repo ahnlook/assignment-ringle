@@ -1,3 +1,6 @@
+import { useDispatch } from 'react-redux'
+
+import { lessonBookingUiActions } from '../../store/lessonBookingUi-slice'
 import Dimmed from './Dimmed'
 import LessonTicketItem from './LessonTicketItem'
 
@@ -21,6 +24,8 @@ const DUMMY_LESSON_TICKETS = [
 ]
 
 const LessonTicketSelector = () => {
+  const dispatch = useDispatch()
+
   return (
     <>
       <Dimmed />
@@ -33,7 +38,7 @@ const LessonTicketSelector = () => {
             <div className='w-5 h-5'>
               <button
                 onClick={() => {
-                  // TODO: close modal
+                  dispatch(lessonBookingUiActions.closeLessonTicketModal())
                 }}
               >
                 <span className='material-symbols-outlined'>close</span>
