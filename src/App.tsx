@@ -1,5 +1,11 @@
-function App() {
-  return <span className='underline'>hello world</span>
+import LessonBooking from './pages/LessonBooking'
+
+const App = () => {
+  return (
+    <>
+      <LessonBooking />
+    </>
+  )
 }
 
 export default App
