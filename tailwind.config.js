@@ -2,6 +2,9 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    screens: {
+      lg: '1085px'
+    },
     extend: {
       fontSize: {
         'h-2': ['24px', { lineHeight: '24px', fontWeight: '700' }],
