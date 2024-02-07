@@ -1,30 +1,14 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { lessonBookingUiActions } from '../../store/lessonBookingUi-slice'
 import Dimmed from './Dimmed'
 import LessonTicketItem from './LessonTicketItem'
-
-const DUMMY_LESSON_TICKETS = [
-  {
-    id: 1,
-    type: '20분',
-    name: '1:1 회화(20분)',
-    remainingPeriod: 30,
-    unusedTickets: 5,
-    isSelected: true
-  },
-  {
-    id: 2,
-    type: '40분',
-    name: '1회 패키지',
-    remainingPeriod: 45,
-    unusedTickets: 1,
-    isSelected: false
-  }
-]
+import { LessonTicket } from '../../type/lessonBooking'
+import { RootState } from '../../store'
 
 const LessonTicketSelector = () => {
   const dispatch = useDispatch()
+  const tickets = useSelector((state: RootState) => state.lessonTickets)
 
   return (
     <>
@@ -46,7 +30,7 @@ const LessonTicketSelector = () => {
             </div>
           </div>
           <div className='flex flex-col gap-y-4'>
-            {DUMMY_LESSON_TICKETS.map(ticket => (
+            {tickets.map((ticket: LessonTicket) => (
               <LessonTicketItem
                 key={ticket.id}
                 id={ticket.id}

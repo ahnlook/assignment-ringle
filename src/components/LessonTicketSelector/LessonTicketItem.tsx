@@ -1,11 +1,8 @@
-interface LessonTicketItemProps {
-  id: number
-  type: string
-  name: string
-  remainingPeriod: number
-  unusedTickets: number
-  isSelected: boolean
-}
+import { useDispatch } from 'react-redux'
+
+import { lessonTicketActions } from '../../store/lessonTickets-slice'
+import { LessonTicket } from '../../type/lessonBooking'
+import { lessonBookingUiActions } from '../../store/lessonBookingUi-slice'
 
 const LessonTicketItem = ({
   id,
@@ -14,14 +11,18 @@ const LessonTicketItem = ({
   remainingPeriod,
   unusedTickets,
   isSelected
-}: LessonTicketItemProps) => {
+}: LessonTicket) => {
+  const dispatch = useDispatch()
+
+  const handleSelect = () => {
+    dispatch(lessonTicketActions.selectLessonTicket(id))
+    dispatch(lessonBookingUiActions.closeLessonTicketModal())
+  }
+
   return (
     <div
-      className={`flex gap-x-5 p-3 rounded-xl border ${isSelected ? 'bg-gray-100 border-purple-600' : 'border-gray-100'}`}
-      onClick={() => {
-        // TODO: select lesson ticket
-        return id
-      }}
+      className={`flex gap-x-5 p-3 rounded-xl border cursor-pointer ${isSelected ? 'bg-gray-100 border-purple-600' : 'border-gray-100'}`}
+      onClick={() => handleSelect()}
     >
       <div className='w-full flex gap-x-5'>
         <div className='h-[42px] w-[42px] flex items-center justify-center flex-none bg-green-500 text-green-600 rounded-full'>
