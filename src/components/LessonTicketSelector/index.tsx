@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { lessonBookingUiActions } from '../../store/lessonBookingUi-slice'
@@ -16,7 +17,7 @@ const LessonTicketSelector = () => {
     dispatch(lessonBookingUiActions.closeLessonTicketModal())
   })
 
-  return (
+  return createPortal(
     <>
       <Dimmed />
       <div className='h-screen flex items-center justify-center opacity-100 translate-y-0'>
@@ -53,7 +54,8 @@ const LessonTicketSelector = () => {
           </div>
         </div>
       </div>
-    </>
+    </>,
+    document.body
   )
 }
 
