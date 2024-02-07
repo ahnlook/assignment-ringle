@@ -1,18 +1,25 @@
 import { RefObject, useEffect } from 'react'
 
 const useOutsideClick = (ref: RefObject<HTMLElement>, callback: () => void) => {
-  const handleClick = (e: MouseEvent) => {
-    if (ref.current && !ref.current.contains(e.target as Node)) {
-      callback()
-    }
-  }
-
   useEffect(() => {
-    document.addEventListener('click', handleClick)
-    return () => {
-      document.removeEventListener('click', handleClick)
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        callback()
+      }
     }
-  })
+
+    const enableClickListener = () =>
+      document.addEventListener('click', handleClickOutside)
+    const disableClickListener = () =>
+      document.removeEventListener('click', handleClickOutside)
+
+    const timer = setTimeout(enableClickListener, 100)
+
+    return () => {
+      clearTimeout(timer)
+      disableClickListener()
+    }
+  }, [ref, callback])
 }
 
 export default useOutsideClick

@@ -19,7 +19,7 @@ const LessonTicketSelector = () => {
   return (
     <>
       <Dimmed />
-      <div className='h-screen flex items-center justify-center opacity-100 translate-y-0'>
+      <div className='fixed inset-0 h-screen flex items-center justify-center opacity-100 translate-y-0'>
         <div
           className='w-full max-w-[724px] p-8 flex flex-col gap-y-4 rounded-2xl bg-white shadow-lg'
           ref={modalRef}
