@@ -12,6 +12,7 @@ export default {
       },
       colors: {
         primary: '#7A5DE8',
+        'purple-50': '#EEEBFA',
         'purple-500': '#503CC8',
         'gray-50': '#FBFBFF',
         'gray-100': '#EFF1F9',
