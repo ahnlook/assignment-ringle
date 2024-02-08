@@ -7,6 +7,7 @@ const DUMMY_LESSON_TICKETS: LessonTicket[] = [
     id: 1,
     type: '20분',
     name: '1:1 회화(20분)',
+    durationMinutes: 20,
     remainingPeriod: 30,
     unusedTickets: 5,
     isSelected: true
@@ -15,6 +16,7 @@ const DUMMY_LESSON_TICKETS: LessonTicket[] = [
     id: 2,
     type: '40분',
     name: '1회 패키지',
+    durationMinutes: 40,
     remainingPeriod: 45,
     unusedTickets: 1,
     isSelected: false
