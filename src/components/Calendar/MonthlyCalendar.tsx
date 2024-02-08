@@ -13,13 +13,13 @@ const MonthlyCalendar = () => {
   )
 
   const handleDayClick = (day: Date) => {
-    dispatch(lessonBookingDateActions.setWeek(day))
+    dispatch(lessonBookingDateActions.setCurrentWeek(day))
   }
 
   return (
     <>
       <style>{css}</style>
-      <div className='p-2.5'>
+      <div className='mt-8 p-2.5 text-xs'>
         <DayPicker
           mode='range'
           selected={range}
@@ -39,7 +39,13 @@ const MonthlyCalendar = () => {
 
 export default MonthlyCalendar
 
-const css = `.my-selected {
+const css = `
+.my-selected {
   color: black;
   background-color: #E4E7F4;
-}`
+}
+.rdp {
+  --rdp-cell-size: 32px;
+  --rdp-caption-font-size: 14px;
+}
+`
