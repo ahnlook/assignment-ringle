@@ -7,6 +7,7 @@ import LessonTicketItem from './LessonTicketItem'
 import { LessonTicket } from '../../type/lessonBooking'
 import { RootState } from '../../store'
 import useOutsideClick from '../../hooks/useOutsideClick'
+import { createPortal } from 'react-dom'
 
 const LessonTicketSelector = () => {
   const dispatch = useDispatch()
@@ -16,7 +17,7 @@ const LessonTicketSelector = () => {
     dispatch(lessonBookingUiActions.closeLessonTicketModal())
   })
 
-  return (
+  return createPortal(
     <>
       <Dimmed />
       <div className='fixed inset-0 h-screen flex items-center justify-center opacity-100 translate-y-0'>
@@ -45,6 +46,7 @@ const LessonTicketSelector = () => {
                 id={ticket.id}
                 type={ticket.type}
                 name={ticket.name}
+                durationMinutes={ticket.durationMinutes}
                 remainingPeriod={ticket.remainingPeriod}
                 unusedTickets={ticket.unusedTickets}
                 isSelected={ticket.isSelected}
@@ -53,7 +55,8 @@ const LessonTicketSelector = () => {
           </div>
         </div>
       </div>
-    </>
+    </>,
+    document.body
   )
 }
 
