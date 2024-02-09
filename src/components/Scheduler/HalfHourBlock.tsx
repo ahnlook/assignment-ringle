@@ -46,7 +46,7 @@ const HalfHourBlock = ({
   })
 
   const handleSetLessonTime = (date: Date) => {
-    dispatch(lessonBookingActions.setBookingDate(date))
+    dispatch(lessonBookingActions.setBookingDate(date.toISOString()))
   }
 
   return (
@@ -65,14 +65,13 @@ const HalfHourBlock = ({
       {showTooltip && (
         <ScheduleTooltip
           className={`bg-white ${lessonDurationMinutes === 20 ? 'h-[18px]' : 'h-[46px]'}`}
-          onClick={() => console.log('clicked')}
         >
           튜터 선택
         </ScheduleTooltip>
       )}
       {bookedLesson && (
         <ScheduleTooltip
-          className={`bg-white ${bookingTicket?.durationMinutes === 20 ? 'h-[18px]' : 'h-[46px]'}`}
+          className={`bg-purple-500 text-white ${bookingTicket?.durationMinutes === 20 ? 'h-[18px]' : 'h-[46px]'}`}
           onClick={() => console.log('clicked')}
         >
           선택 완료
