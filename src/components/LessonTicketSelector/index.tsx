@@ -1,18 +1,18 @@
 import { useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { lessonBookingUiActions } from '../../store/lessonBookingUi-slice'
+import { RootState } from '../../store'
+import { LessonTicket } from '../../type/lessonTicket'
+import useOutsideClick from '../../hooks/useOutsideClick'
 import Dimmed from './Dimmed'
 import LessonTicketItem from './LessonTicketItem'
-import { LessonTicket } from '../../type/lessonBooking'
-import { RootState } from '../../store'
-import useOutsideClick from '../../hooks/useOutsideClick'
-import { createPortal } from 'react-dom'
 
 const LessonTicketSelector = () => {
   const dispatch = useDispatch()
-  const tickets = useSelector((state: RootState) => state.lessonTickets)
   const modalRef = useRef<HTMLDivElement>(null)
+  const { tickets } = useSelector((state: RootState) => state.lessonTicket)
   useOutsideClick(modalRef, () => {
     dispatch(lessonBookingUiActions.closeLessonTicketModal())
   })
@@ -41,16 +41,7 @@ const LessonTicketSelector = () => {
           </div>
           <div className='flex flex-col gap-y-4'>
             {tickets.map((ticket: LessonTicket) => (
-              <LessonTicketItem
-                key={ticket.id}
-                id={ticket.id}
-                type={ticket.type}
-                name={ticket.name}
-                durationMinutes={ticket.durationMinutes}
-                remainingPeriod={ticket.remainingPeriod}
-                unusedTickets={ticket.unusedTickets}
-                isSelected={ticket.isSelected}
-              />
+              <LessonTicketItem key={ticket.id} ticket={ticket} />
             ))}
           </div>
         </div>
