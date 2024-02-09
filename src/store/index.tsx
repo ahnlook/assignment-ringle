@@ -1,19 +1,19 @@
-import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 
 import lessonBookingUiSlice from './lessonBookingUi-slice'
-import bookedLessonsSlice from './lessonBooking-slice'
-import lessonTicketsSlice from './lessonTickets-slice'
-
-export const listenerMiddleware = createListenerMiddleware()
+import lessonBookingSlice from './lessonBooking-slice'
+import lessonTicketsSlice from './lessonTicket-slice'
+import lessonSchedulerSlice from './lessonScheduler-slice'
+import tutorSlice from './tutor-slice'
 
 const store = configureStore({
   reducer: {
     lessonBookingUi: lessonBookingUiSlice.reducer,
-    bookedLessons: bookedLessonsSlice.reducer,
-    lessonTickets: lessonTicketsSlice.reducer
+    lessonBooking: lessonBookingSlice.reducer,
+    lessonTicket: lessonTicketsSlice.reducer,
+    lessonScheduler: lessonSchedulerSlice.reducer,
+    tutor: tutorSlice.reducer
   },
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().prepend(listenerMiddleware.middleware),
   devTools: import.meta.env.MODE !== 'production'
 })
 

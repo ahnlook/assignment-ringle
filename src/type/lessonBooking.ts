@@ -1,8 +1,10 @@
-export interface LessonTicket {
-  id: number
-  type: string
-  name: string
-  remainingPeriod: number
-  unusedTickets: number
-  isSelected: boolean
+import { ISODate } from './shared'
+import { LessonTicket } from './lessonTicket'
+import { Tutor } from './tutor'
+
+export interface LessonBooking {
+  id: string
+  date: ISODate
+  ticketId: LessonTicket['id']
+  tutorId: Tutor['id']
 }
