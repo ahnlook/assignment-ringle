@@ -1,19 +1,54 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice, nanoid } from '@reduxjs/toolkit'
 
-import { LessonTicket } from '../type/lessonBooking'
+import { LessonBooking } from '../type/lessonBooking'
+import { ISODate } from '../type/shared'
+import { LessonTicket } from '../type/lessonTicket'
+import { Tutor } from '../type/tutor'
 
-const bookedLessons: LessonTicket[] = []
+interface lessonBookingState {
+  bookingList: LessonBooking[]
+  selectedDate: ISODate | null
+  selectedTicketId: LessonTicket['id']
+  selectedTutorId: Tutor['id'] | null
+}
 
-const bookedLessonsSlice = createSlice({
-  name: 'bookedLessons',
-  initialState: bookedLessons,
+const initialState: lessonBookingState = {
+  bookingList: [],
+  selectedDate: null,
+  selectedTicketId: '1',
+  selectedTutorId: null
+}
+
+const lessonBookingSlice = createSlice({
+  name: 'lessonBooking',
+  initialState,
   reducers: {
-    bookLesson(state, action) {
-      const bookedLesson = action.payload
-      state.push(bookedLesson)
+    booking: {
+      reducer(state, action: PayloadAction<LessonBooking>) {
+        state.bookingList.push(action.payload)
+        state.selectedDate = null
+        state.selectedTutorId = null
+      },
+      prepare(bookingInfo: Omit<LessonBooking, 'id'>) {
+        return {
+          payload: {
+            ...bookingInfo,
+            id: nanoid()
+          }
+        }
+      }
+    },
+    setBookingDate(state, action) {
+      state.selectedDate = action.payload
+    },
+    setBookingTicketId(state, action) {
+      state.selectedTicketId = action.payload
+    },
+    setBookingTutorId(state, action) {
+      state.selectedTutorId = action.payload
     }
   }
 })
 
-export const lessonBookingActions = bookedLessonsSlice.actions
-export default bookedLessonsSlice
+export const lessonBookingActions = lessonBookingSlice.actions
+export default lessonBookingSlice
