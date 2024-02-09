@@ -21,7 +21,11 @@ const TutorItem = ({ tutor }: { tutor: Tutor }) => {
     if (!date) return
     if (!ticketId) return
     if (!ticket) return
-    if (ticket.unusedTickets <= 0) return alert('수업권이 부족합니다')
+    if (ticket.unusedTickets <= 0) {
+      alert('수업권이 부족합니다')
+      dispatch(lessonBookingActions.setBookingTutorId(null))
+      return
+    }
 
     dispatch(
       lessonBookingActions.booking({
