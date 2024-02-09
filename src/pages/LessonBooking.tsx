@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../store'
 import LessonTicketSelector from '../components/LessonTicketSelector'
 import Header from '../components/Header'
+import Schedule from '../components/Scheduler'
+import TutorSelector from '../components/TutorSelector'
 
 const LessonBooking = () => {
   const isLessonTicketModalOpen = useSelector(
@@ -12,7 +14,13 @@ const LessonBooking = () => {
   return (
     <>
       {isLessonTicketModalOpen && <LessonTicketSelector />}
-      <Header />
+      <div className={`${isLessonTicketModalOpen && 'pointer-events-none'}`}>
+        <Header />
+        <div className='flex'>
+          <Schedule />
+          <TutorSelector />
+        </div>
+      </div>
     </>
   )
 }
