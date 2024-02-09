@@ -8,7 +8,9 @@ export default {
     extend: {
       fontSize: {
         'h-2': ['24px', { lineHeight: '24px', fontWeight: '700' }],
-        'h-4': ['16px', { lineHeight: '24px' }]
+        'h-4': ['16px', { lineHeight: '24px' }],
+        'h-5': ['14px', { lineHeight: '21px', fontWeight: '500' }],
+        'h-6': ['12px', { lineHeight: '18px' }]
       },
       colors: {
         primary: '#7A5DE8',
