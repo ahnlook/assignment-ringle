@@ -35,7 +35,7 @@ const LessonTicketSelector = () => {
                   dispatch(lessonBookingUiActions.closeLessonTicketModal())
                 }}
               >
-                <span className='material-symbols-outlined'>close</span>
+                <i className='material-symbols-outlined'>close</i>
               </button>
             </div>
           </div>
