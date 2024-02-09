@@ -7,12 +7,11 @@ import { Tutor } from '../../type/tutor'
 const TutorItem = ({ tutor }: { tutor: Tutor }) => {
   const { id, name, university, major, acceptanceRate, tag } = tutor
   const dispatch = useDispatch()
-  const date = useSelector(
-    (state: RootState) => state.lessonBooking.selectedDate
+
+  const { selectedDate: date, selectedTicketId: ticketId } = useSelector(
+    (state: RootState) => state.lessonBooking
   )
-  const ticketId = useSelector(
-    (state: RootState) => state.lessonBooking.selectedTicketId
-  )
+
   const ticket = useSelector((state: RootState) =>
     state.lessonTicket.tickets.find(ticket => ticket.id === ticketId)
   )
