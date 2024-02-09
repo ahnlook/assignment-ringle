@@ -9,7 +9,7 @@ const ScheduleTooltip = ({
 }) => {
   return (
     <button
-      className={`${className} w-[94%] bg-purple-50 m-1 shadow-lg border border-primary rounded-lg z-10`}
+      className={`${className} absolute inset-0 w-[94%] bg-purple-50 m-1 shadow-lg border border-primary rounded-lg z-10`}
       onClick={onClick}
     >
       {children}

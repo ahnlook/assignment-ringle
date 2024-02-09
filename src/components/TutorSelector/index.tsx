@@ -11,7 +11,7 @@ const TutorSelector = () => {
   )
 
   return (
-    <div className='h-screen w-[347px] ml-2 border-x'>
+    <div className='h-screen w-[347px] min-w-[347px] ml-2'>
       {!isDateSelected ? (
         <TutorSelectionMessage />
       ) : (

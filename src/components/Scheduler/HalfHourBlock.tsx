@@ -54,17 +54,17 @@ const HalfHourBlock = ({
       style={{
         borderTopStyle: `${isOnTheHour ? 'solid' : 'dashed'}`
       }}
-      className={`relative h-7 flex justify-start border-t border-r border-gray-200 text-xs ${isFuture || 'bg-gray-200 bg-opacity-40 pointer-events-none'}`}
+      className={`relative h-7 min-h-7 flex justify-start border-t border-r border-gray-200 text-xs ${isFuture || 'bg-gray-200 bg-opacity-40 pointer-events-none'}`}
     >
       <ScheduleTooltip
-        className={`absolute inset-0 opacity-0 hover:opacity-100 ${lessonDurationMinutes === 20 ? 'h-[18px]' : 'h-[46px]'}`}
+        className={`opacity-0 hover:opacity-100 ${lessonDurationMinutes === 20 ? 'h-[18px]' : 'h-[46px]'}`}
         onClick={() => handleSetLessonTime(date)}
       >
         {hours}:{minutes || '00'}
       </ScheduleTooltip>
       {showTooltip && (
         <ScheduleTooltip
-          className={`absolute inset-0 bg-white ${lessonDurationMinutes === 20 ? 'h-[18px]' : 'h-[46px]'}`}
+          className={`bg-white ${lessonDurationMinutes === 20 ? 'h-[18px]' : 'h-[46px]'}`}
           onClick={() => console.log('clicked')}
         >
           튜터 선택
@@ -72,7 +72,7 @@ const HalfHourBlock = ({
       )}
       {bookedLesson && (
         <ScheduleTooltip
-          className={`absolute inset-0 bg-white ${bookingTicket?.durationMinutes === 20 ? 'h-[18px]' : 'h-[46px]'}`}
+          className={`bg-white ${bookingTicket?.durationMinutes === 20 ? 'h-[18px]' : 'h-[46px]'}`}
           onClick={() => console.log('clicked')}
         >
           선택 완료
