@@ -4,8 +4,8 @@ import { RootState } from '../../store'
 
 const LessonBookingCount = () => {
   const bookingCount = useSelector(
-    (state: RootState) => state.bookedLessons
-  ).length
+    (state: RootState) => state.lessonBooking.bookingList.length
+  )
 
   return (
     <div className='flex items-center gap-x-2'>

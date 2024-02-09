@@ -1,21 +1,19 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { lessonTicketActions } from '../../store/lessonTickets-slice'
-import { LessonTicket } from '../../type/lessonBooking'
+import { RootState } from '../../store'
+import { lessonBookingActions } from '../../store/lessonBooking-slice'
 import { lessonBookingUiActions } from '../../store/lessonBookingUi-slice'
+import { LessonTicket } from '../../type/lessonTicket'
 
-const LessonTicketItem = ({
-  id,
-  type,
-  name,
-  remainingPeriod,
-  unusedTickets,
-  isSelected
-}: LessonTicket) => {
+const LessonTicketItem = ({ ticket }: { ticket: LessonTicket }) => {
+  const { id, type, name, remainingPeriods, unusedTickets } = ticket
   const dispatch = useDispatch()
+  const isSelected = useSelector(
+    (state: RootState) => state.lessonBooking.selectedTicketId === id
+  )
 
   const handleSelect = () => {
-    dispatch(lessonTicketActions.selectLessonTicket(id))
+    dispatch(lessonBookingActions.setBookingTicketId(id))
     dispatch(lessonBookingUiActions.closeLessonTicketModal())
   }
 
@@ -31,7 +29,7 @@ const LessonTicketItem = ({
         <div className='flex-auto'>
           <div className='text-h-4'>{name}</div>
           <div className='text-xs text-gray-500'>
-            수강 기간: {remainingPeriod}일 남음
+            수강 기간: {remainingPeriods}일 남음
           </div>
         </div>
         <div className='flex-none'>

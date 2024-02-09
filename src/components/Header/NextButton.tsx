@@ -3,7 +3,9 @@ import { RootState } from '../../store'
 
 const NextButton = () => {
   const isDisabled =
-    useSelector((state: RootState) => state.bookedLessons).length === 0
+    useSelector(
+      (state: RootState) => state.lessonBooking.bookingList.length
+    ) === 0
 
   return (
     <button
