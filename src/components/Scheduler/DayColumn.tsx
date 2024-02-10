@@ -7,6 +7,7 @@ const DayColumn = ({ date }: { date: Date }) => {
   const dayOfWeek = format(date, 'eee', { locale: ko })
   const dayOfMonth = format(date, 'd')
   const isToday = checkIsToday(date)
+  const isHoliday = dayOfWeek === '일' || dayOfWeek === '토'
   const now = new Date()
 
   const timeSlots = Array.from({ length: 48 }, (_, i) => {
@@ -33,7 +34,9 @@ const DayColumn = ({ date }: { date: Date }) => {
 
   return (
     <div className='flex-1 flex flex-col'>
-      <div className={`flex flex-col items-center p-2`}>
+      <div
+        className={`flex flex-col items-center p-2 ${isHoliday && 'text-red-500'}`}
+      >
         <div className='text-sm'>{dayOfWeek}</div>
         <div
           className={`h-[38px] w-[38px] flex items-center justify-center text-lg font-bold rounded-full ${isToday ? 'bg-primary text-white' : ''}`}

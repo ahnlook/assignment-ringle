@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { DayPicker } from 'react-day-picker'
 import 'react-day-picker/dist/style.css'
 import { ko } from 'date-fns/locale'
-import { parseISO } from 'date-fns'
 
 import { lessonSchedulerActions } from '../../store/lessonScheduler-slice'
 import { RootState } from '../../store'
@@ -13,10 +12,10 @@ const MonthlyCalendar = () => {
   const { from, to } = useSelector(
     (state: RootState) => state.lessonScheduler.currentWeek
   )
-  const range = { from: parseISO(from), to: parseISO(to) }
+  const range = { from: new Date(from), to: new Date(to) }
 
   const handleDayClick = (day: Date) => {
-    dispatch(lessonSchedulerActions.setCurrentWeek(day))
+    dispatch(lessonSchedulerActions.setCurrentWeek(day.toString()))
   }
 
   return (
