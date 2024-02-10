@@ -8,7 +8,7 @@ const LessonBooking = () => {
     <>
       <LessonTicketSelector />
       <Header />
-      <div className='flex'>
+      <div className='h-[80vh] flex'>
         <Schedule />
         <TutorSelector />
       </div>

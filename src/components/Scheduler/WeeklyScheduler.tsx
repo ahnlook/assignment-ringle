@@ -12,7 +12,7 @@ const WeeklyScheduler = () => {
   const days = Array.from({ length: 7 }, (_, i) => addDays(startDate, i))
 
   return (
-    <div className='w-full h-screen flex overflow-scroll'>
+    <div className='w-full h-[80vh] flex overflow-scroll'>
       {days.map((date, index) => (
         <DayColumn key={index} date={date} />
       ))}
