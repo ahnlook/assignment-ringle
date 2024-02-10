@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 
 import MonthlyCalendar from '../Calendar/MonthlyCalendar'
-import TipBox from './TipBox'
+import TipBox from '../TipBox'
 import WeeklyScheduler from './WeeklyScheduler'
 import { RootState } from '../../store'
 
