@@ -1,13 +1,13 @@
 import { PayloadAction, createSlice, nanoid } from '@reduxjs/toolkit'
 
 import { LessonBooking } from '../type/lessonBooking'
-import { ISODate } from '../type/shared'
+import { DateString } from '../type/shared'
 import { LessonTicket } from '../type/lessonTicket'
 import { Tutor } from '../type/tutor'
 
 interface lessonBookingState {
   bookingList: LessonBooking[]
-  selectedDate: ISODate | null
+  selectedDate: DateString | null
   selectedTicketId: LessonTicket['id']
   selectedTutorId: Tutor['id'] | null
 }
@@ -27,7 +27,7 @@ const lessonBookingSlice = createSlice({
       reducer(state, action: PayloadAction<LessonBooking>) {
         state.bookingList.push(action.payload)
         state.selectedDate = null
-        state.selectedTutorId = null
+        // state.selectedTutorId = null
       },
       prepare(bookingInfo: Omit<LessonBooking, 'id'>) {
         return {

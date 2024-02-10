@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 import { endOfWeek, startOfWeek } from 'date-fns'
 
 const weekRange = (day: Date) => ({
-  from: startOfWeek(day, { weekStartsOn: 0 }).toISOString(),
-  to: endOfWeek(day, { weekStartsOn: 0 }).toISOString()
+  from: startOfWeek(day, { weekStartsOn: 0 }).toString(),
+  to: endOfWeek(day, { weekStartsOn: 0 }).toString()
 })
 
 const initialState = {

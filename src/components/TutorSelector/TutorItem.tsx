@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { lessonBookingActions } from '../../store/lessonBooking-slice'
 import { RootState } from '../../store'
 import { Tutor } from '../../type/tutor'
+import { DateString, LessonDate } from '../../type/shared'
 
 const TutorItem = ({ tutor }: { tutor: Tutor }) => {
   const { id, name, university, major, acceptanceRate, tag } = tutor
@@ -26,9 +27,21 @@ const TutorItem = ({ tutor }: { tutor: Tutor }) => {
       return
     }
 
+    const lessonDate = (date: DateString): LessonDate => {
+      if (ticket.durationMinutes === 40) {
+        const start = new Date(date)
+        const end = new Date(
+          start.setMinutes(start.getMinutes() + 30)
+        ).toString()
+        console.log([date, end])
+        return [date, end]
+      }
+      return [date]
+    }
+
     dispatch(
       lessonBookingActions.booking({
-        date,
+        date: lessonDate(date),
         ticketId,
         tutorId: id
       })
