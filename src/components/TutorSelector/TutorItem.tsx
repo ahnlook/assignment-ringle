@@ -33,7 +33,6 @@ const TutorItem = ({ tutor }: { tutor: Tutor }) => {
         const end = new Date(
           start.setMinutes(start.getMinutes() + 30)
         ).toString()
-        console.log([date, end])
         return [date, end]
       }
       return [date]
