@@ -46,6 +46,12 @@ const lessonBookingSlice = createSlice({
     },
     setBookingTutorId(state, action) {
       state.selectedTutorId = action.payload
+    },
+    cancelBooking(state, action: PayloadAction<LessonBooking>) {
+      const index = state.bookingList.findIndex(
+        booking => booking.id === action.payload.id
+      )
+      state.bookingList.splice(index, 1)
     }
   }
 })

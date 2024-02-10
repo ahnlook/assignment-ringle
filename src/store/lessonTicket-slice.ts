@@ -1,7 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 import { LessonTicket } from '../type/lessonTicket'
 import { lessonBookingActions } from './lessonBooking-slice'
+import { LessonBooking } from '../type/lessonBooking'
 
 const DUMMY_LESSON_TICKETS: LessonTicket[] = [
   {
@@ -33,7 +34,17 @@ const lessonTicketSlice = createSlice({
       const { ticketId } = action.payload
       const usedTicket = state.tickets.find(ticket => ticket.id === ticketId)
       if (usedTicket) usedTicket.unusedTickets--
-    })
+    }),
+      builder.addCase(
+        lessonBookingActions.cancelBooking,
+        (state, action: PayloadAction<LessonBooking>) => {
+          const { ticketId } = action.payload
+          const usedTicket = state.tickets.find(
+            ticket => ticket.id === ticketId
+          )
+          if (usedTicket) usedTicket.unusedTickets++
+        }
+      )
   }
 })
 

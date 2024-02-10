@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { getHours, getMinutes } from 'date-fns'
 
-import { RootState } from '../../store'
+import { lessonBookingUiActions } from '../../store/lessonBookingUi-slice'
 import { lessonBookingActions } from '../../store/lessonBooking-slice'
+import { RootState } from '../../store'
 import ScheduleTooltip from './ScheduleTooltip'
+import ScheduleDeletionModal from '../Modal/ScheduleDeletionModal'
 
 const HalfHourBlock = ({
   date,
@@ -54,6 +56,10 @@ const HalfHourBlock = ({
     dispatch(lessonBookingActions.setBookingDate(date.toString()))
   }
 
+  const handleLessonClick = () => {
+    dispatch(lessonBookingUiActions.openScheduleDeletionAlert())
+  }
+
   return (
     <div
       style={{
@@ -77,11 +83,12 @@ const HalfHourBlock = ({
       {isLessonStart && (
         <ScheduleTooltip
           className={`bg-purple-500 text-white ${selectedBookingTicket?.durationMinutes === 20 ? 'h-[18px]' : 'h-[46px]'}`}
-          onClick={() => console.log('clicked')}
+          onClick={handleLessonClick}
         >
           선택 완료
         </ScheduleTooltip>
       )}
+      {bookedLesson && <ScheduleDeletionModal schedule={bookedLesson} />}
     </div>
   )
 }
