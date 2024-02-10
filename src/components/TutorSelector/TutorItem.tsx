@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 
+import { lessonBookingUiActions } from '../../store/lessonBookingUi-slice'
 import { lessonBookingActions } from '../../store/lessonBooking-slice'
 import { RootState } from '../../store'
 import { Tutor } from '../../type/tutor'
@@ -22,7 +23,7 @@ const TutorItem = ({ tutor }: { tutor: Tutor }) => {
     if (!ticketId) return
     if (!ticket) return
     if (ticket.unusedTickets <= 0) {
-      alert('수업권이 부족합니다')
+      dispatch(lessonBookingUiActions.openNoTicketAlert())
       dispatch(lessonBookingActions.setBookingTutorId(null))
       return
     }
