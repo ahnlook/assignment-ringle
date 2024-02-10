@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 const lessonBookingUiSlice = createSlice({
   name: 'lessonBookingUi',
   initialState: {
-    lessonTicketModalIsVisible: true
+    lessonTicketModalIsVisible: true,
+    tipBoxIsVisible: true
   },
   reducers: {
     openLessonTicketModal(state) {
@@ -11,6 +12,9 @@ const lessonBookingUiSlice = createSlice({
     },
     closeLessonTicketModal(state) {
       state.lessonTicketModalIsVisible = false
+    },
+    closeTipBox(state) {
+      state.tipBoxIsVisible = false
     }
   }
 })
