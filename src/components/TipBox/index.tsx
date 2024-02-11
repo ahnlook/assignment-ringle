@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import { lessonBookingUiActions } from '../../store/lessonBookingUi-slice'
+import { lessonBookingUiActions } from '../../store/lessonBookingUiSlice'
 
 const TIPS = [
   '주 1회 이상 꾸준히 공부해야 영어 실력이 늘어요.',

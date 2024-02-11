@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 import { LessonTicket } from '../type/lessonTicket'
-import { lessonBookingActions } from './lessonBooking-slice'
+import { lessonBookingActions } from './lessonBookingSlice'
 import { LessonBooking } from '../type/lessonBooking'
 
 const DUMMY_LESSON_TICKETS: LessonTicket[] = [

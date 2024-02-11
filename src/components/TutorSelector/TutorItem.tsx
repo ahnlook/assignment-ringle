@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 
-import { lessonBookingUiActions } from '../../store/lessonBookingUi-slice'
-import { lessonBookingActions } from '../../store/lessonBooking-slice'
+import { lessonBookingUiActions } from '../../store/lessonBookingUiSlice'
+import { lessonBookingActions } from '../../store/lessonBookingSlice'
 import { RootState } from '../../store'
 import { Tutor } from '../../type/tutor'
 import { DateString, LessonDate } from '../../type/shared'
@@ -21,7 +21,6 @@ const TutorItem = ({ tutor }: { tutor: Tutor }) => {
   )
 
   const isSelected = selectedTutorId === id
-  console.log(selectedTutorId, id, selectedTutorId === id)
 
   const onTutorClick = () => {
     if (!date) return

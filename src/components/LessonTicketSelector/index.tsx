@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 
-import { lessonBookingUiActions } from '../../store/lessonBookingUi-slice'
+import { lessonBookingUiActions } from '../../store/lessonBookingUiSlice'
 import { RootState } from '../../store'
 import { LessonTicket } from '../../type/lessonTicket'
 import LessonTicketItem from './LessonTicketItem'

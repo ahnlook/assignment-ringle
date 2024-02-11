@@ -3,7 +3,7 @@ import { DayPicker } from 'react-day-picker'
 import 'react-day-picker/dist/style.css'
 import { ko } from 'date-fns/locale'
 
-import { lessonSchedulerActions } from '../../store/lessonScheduler-slice'
+import { lessonSchedulerActions } from '../../store/lessonSchedulerSlice'
 import { RootState } from '../../store'
 
 const today = new Date()

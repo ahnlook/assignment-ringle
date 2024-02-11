@@ -6,8 +6,8 @@ import Button from '../Button'
 import { LessonBooking } from '../../type/lessonBooking'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store'
-import { lessonBookingActions } from '../../store/lessonBooking-slice'
-import { lessonBookingUiActions } from '../../store/lessonBookingUi-slice'
+import { lessonBookingActions } from '../../store/lessonBookingSlice'
+import { lessonBookingUiActions } from '../../store/lessonBookingUiSlice'
 
 interface ScheduleDeletionModalProps {
   schedule: LessonBooking

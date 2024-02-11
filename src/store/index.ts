@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import lessonBookingUiSlice from './lessonBookingUi-slice'
-import lessonBookingSlice from './lessonBooking-slice'
-import lessonTicketsSlice from './lessonTicket-slice'
-import lessonSchedulerSlice from './lessonScheduler-slice'
-import tutorSlice from './tutor-slice'
+import lessonBookingUiSlice from './lessonBookingUiSlice'
+import lessonBookingSlice from './lessonBookingSlice'
+import lessonTicketsSlice from './lessonTicketSlice'
+import lessonSchedulerSlice from './lessonSchedulerSlice'
+import tutorSlice from './tutorSlice'
 
 const store = configureStore({
   reducer: {

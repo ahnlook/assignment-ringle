@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { getHours, getMinutes } from 'date-fns'
 
-import { lessonBookingUiActions } from '../../store/lessonBookingUi-slice'
-import { lessonBookingActions } from '../../store/lessonBooking-slice'
+import { lessonBookingUiActions } from '../../store/lessonBookingUiSlice'
+import { lessonBookingActions } from '../../store/lessonBookingSlice'
 import { RootState } from '../../store'
 import ScheduleTooltip from './ScheduleTooltip'
 import ScheduleDeletionModal from '../Modal/ScheduleDeletionModal'
