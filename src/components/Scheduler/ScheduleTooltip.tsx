@@ -1,15 +1,19 @@
+import { ReactNode } from 'react'
+
+interface ScheduleTooltipProps {
+  className: string
+  children: ReactNode
+  onClick?: () => void
+}
+
 const ScheduleTooltip = ({
   className,
   children,
   onClick
-}: {
-  className: string
-  children: React.ReactNode
-  onClick?: () => void
-}) => {
+}: ScheduleTooltipProps) => {
   return (
     <button
-      className={`${className} absolute inset-0 w-[94%] bg-purple-50 m-1 shadow-lg border border-primary rounded-lg z-10`}
+      className={`${className} absolute inset-0 max-w-[94%] bg-purple-50 m-1 shadow-lg border border-primary rounded-lg z-10`}
       onClick={onClick}
     >
       {children}

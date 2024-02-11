@@ -1,34 +1,62 @@
 import { useDispatch, useSelector } from 'react-redux'
 
+import { lessonBookingUiActions } from '../../store/lessonBookingUi-slice'
 import { lessonBookingActions } from '../../store/lessonBooking-slice'
 import { RootState } from '../../store'
 import { Tutor } from '../../type/tutor'
+import { DateString, LessonDate } from '../../type/shared'
 
 const TutorItem = ({ tutor }: { tutor: Tutor }) => {
   const { id, name, university, major, acceptanceRate, tag } = tutor
   const dispatch = useDispatch()
 
-  const { selectedDate: date, selectedTicketId: ticketId } = useSelector(
-    (state: RootState) => state.lessonBooking
-  )
+  const {
+    selectedDate: date,
+    selectedTicketId: ticketId,
+    selectedTutorId
+  } = useSelector((state: RootState) => state.lessonBooking)
 
   const ticket = useSelector((state: RootState) =>
     state.lessonTicket.tickets.find(ticket => ticket.id === ticketId)
   )
 
+  const isSelected = selectedTutorId === id
+  console.log(selectedTutorId, id, selectedTutorId === id)
+
   const onTutorClick = () => {
     if (!date) return
     if (!ticketId) return
     if (!ticket) return
+
+    const lessonDate = (date: DateString): LessonDate => {
+      if (ticket.durationMinutes === 40) {
+        const start = new Date(date)
+        const end = new Date(
+          start.setMinutes(start.getMinutes() + 30)
+        ).toString()
+        return [date, end]
+      }
+      return [date]
+    }
+
+    if (selectedTutorId) {
+      dispatch(
+        lessonBookingActions.changeBookingTutorId({
+          newTutorId: id
+        })
+      )
+      return
+    }
+
     if (ticket.unusedTickets <= 0) {
-      alert('수업권이 부족합니다')
+      dispatch(lessonBookingUiActions.openNoTicketAlert())
       dispatch(lessonBookingActions.setBookingTutorId(null))
       return
     }
 
     dispatch(
       lessonBookingActions.booking({
-        date,
+        date: lessonDate(date),
         ticketId,
         tutorId: id
       })
@@ -36,7 +64,10 @@ const TutorItem = ({ tutor }: { tutor: Tutor }) => {
   }
 
   return (
-    <button className='w-full p-4 text-left border-b' onClick={onTutorClick}>
+    <button
+      className={`w-full p-4 text-left border-b hover:bg-purple-50 hover:shadow-md ${isSelected && 'bg-purple-50 border-y border-purple-500'}`}
+      onClick={onTutorClick}
+    >
       <div className='text-h-2'>{name}</div>
       <div className='text-h-5'>{university}</div>
       <div className='text-gray-500 text-sm'>{major}</div>

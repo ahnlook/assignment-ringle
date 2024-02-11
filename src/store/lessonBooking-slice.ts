@@ -1,13 +1,13 @@
 import { PayloadAction, createSlice, nanoid } from '@reduxjs/toolkit'
 
 import { LessonBooking } from '../type/lessonBooking'
-import { ISODate } from '../type/shared'
+import { DateString } from '../type/shared'
 import { LessonTicket } from '../type/lessonTicket'
 import { Tutor } from '../type/tutor'
 
 interface lessonBookingState {
   bookingList: LessonBooking[]
-  selectedDate: ISODate | null
+  selectedDate: DateString | null
   selectedTicketId: LessonTicket['id']
   selectedTutorId: Tutor['id'] | null
 }
@@ -26,8 +26,7 @@ const lessonBookingSlice = createSlice({
     booking: {
       reducer(state, action: PayloadAction<LessonBooking>) {
         state.bookingList.push(action.payload)
-        state.selectedDate = null
-        state.selectedTutorId = null
+        state.selectedTutorId = action.payload.tutorId
       },
       prepare(bookingInfo: Omit<LessonBooking, 'id'>) {
         return {
@@ -38,14 +37,31 @@ const lessonBookingSlice = createSlice({
         }
       }
     },
-    setBookingDate(state, action) {
+    setBookingDate(state, action: PayloadAction<DateString>) {
       state.selectedDate = action.payload
+      state.selectedTutorId = null
     },
-    setBookingTicketId(state, action) {
+    setBookingTicketId(state, action: PayloadAction<LessonTicket['id']>) {
       state.selectedTicketId = action.payload
     },
-    setBookingTutorId(state, action) {
+    setBookingTutorId(state, action: PayloadAction<Tutor['id'] | null>) {
       state.selectedTutorId = action.payload
+    },
+    changeBookingTutorId: (
+      state,
+      action: PayloadAction<{
+        newTutorId: Tutor['id']
+      }>
+    ) => {
+      const { newTutorId } = action.payload
+      state.selectedTutorId = newTutorId
+      state.bookingList[state.bookingList.length - 1].tutorId = newTutorId
+    },
+    cancelBooking(state, action: PayloadAction<LessonBooking>) {
+      const index = state.bookingList.findIndex(
+        booking => booking.id === action.payload.id
+      )
+      state.bookingList.splice(index, 1)
     }
   }
 })
