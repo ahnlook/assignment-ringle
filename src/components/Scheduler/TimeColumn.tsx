@@ -1,9 +1,5 @@
 const TimeColumn = () => {
-  const timeSlots = Array.from({ length: 24 }, (_, i) => {
-    const hour = Math.floor(i)
-
-    return { hour }
-  })
+  const timeSlots = Array.from({ length: 24 }, (_, i) => ({ hour: i }))
 
   return (
     <div className='flex flex-col pt-[67px]'>
@@ -12,7 +8,7 @@ const TimeColumn = () => {
           key={hour}
           className={`min-h-14 pr-2.5 text-[10px] text-right text-gray-500`}
         >
-          <span>{hour}시</span>
+          {hour}시
         </div>
       ))}
     </div>
