@@ -13,7 +13,7 @@ const TutorSelector = () => {
   )
 
   return (
-    <div className='w-[347px] min-w-[347px] ml-2 border-l'>
+    <div className='h-full w-[347px] min-w-[347px] ml-2 border-l overflow-auto'>
       {!selectedDate ? (
         <TutorSelectionMessage />
       ) : (

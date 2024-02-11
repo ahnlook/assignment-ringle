@@ -7,7 +7,7 @@ const Schedule = () => {
   return (
     <div className='flex flex-1'>
       <MonthlyCalendar />
-      <div className='flex flex-col flex-1'>
+      <div className='min-w-fit flex flex-col flex-1'>
         <TipBox />
         <WeeklyScheduler />
       </div>
