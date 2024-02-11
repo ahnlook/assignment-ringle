@@ -15,7 +15,7 @@ const Schedule = () => {
     <>
       <div className='flex flex-1'>
         <MonthlyCalendar />
-        <div className='flex-1'>
+        <div className='flex flex-col flex-1'>
           {tipBoxIsVisible && <TipBox />}
           <WeeklyScheduler />
         </div>

@@ -21,7 +21,7 @@ const MonthlyCalendar = () => {
   return (
     <>
       <style>{css}</style>
-      <div className='mt-8 p-2.5 text-xs'>
+      <div className='mt-8 text-xs'>
         <DayPicker
           mode='range'
           selected={range}

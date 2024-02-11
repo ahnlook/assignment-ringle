@@ -5,14 +5,14 @@ import TutorSelector from '../components/TutorSelector'
 
 const LessonBooking = () => {
   return (
-    <>
+    <div className='h-screen'>
       <LessonTicketSelector />
       <Header />
-      <div className='h-[80vh] flex'>
+      <div style={{ height: 'calc(100% - 71px)' }} className='flex'>
         <Schedule />
         <TutorSelector />
       </div>
-    </>
+    </div>
   )
 }
 
