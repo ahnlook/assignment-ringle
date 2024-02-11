@@ -37,32 +37,29 @@ const ScheduleDeletionModal = ({ schedule }: ScheduleDeletionModalProps) => {
     handleClose()
   }
 
+  if (!isOpen) return null
   return (
-    <>
-      {isOpen && (
-        <Modal onClose={handleClose}>
-          <div className='flex flex-col gap-y-2'>
-            <div>
-              {lessonBooking &&
-                format(lessonBooking.date[0], 'M월 d일(E) HH:mm', {
-                  locale: ko
-                })}
-            </div>
-            <div>{tutor?.name}</div>
-            <div>이 수업을 삭제하시겠습니까?</div>
-            <div className='flex justify-end gap-x-2 mt-6'>
-              <Button
-                className='bg-white text-purple-800 border border-purple-800'
-                onClick={handleClose}
-              >
-                취소
-              </Button>
-              <Button onClick={() => handleLessonCancel(schedule)}>확인</Button>
-            </div>
-          </div>
-        </Modal>
-      )}
-    </>
+    <Modal onClose={handleClose}>
+      <div className='flex flex-col gap-y-2'>
+        <div>
+          {lessonBooking &&
+            format(lessonBooking.date[0], 'M월 d일(E) HH:mm', {
+              locale: ko
+            })}
+        </div>
+        <div>{tutor?.name}</div>
+        <div>이 수업을 삭제하시겠습니까?</div>
+        <div className='flex justify-end gap-x-2 mt-6'>
+          <Button
+            className='bg-white text-purple-800 border border-purple-800'
+            onClick={handleClose}
+          >
+            취소
+          </Button>
+          <Button onClick={() => handleLessonCancel(schedule)}>확인</Button>
+        </div>
+      </div>
+    </Modal>
   )
 }
 
