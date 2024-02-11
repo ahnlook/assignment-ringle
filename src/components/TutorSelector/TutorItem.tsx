@@ -40,7 +40,6 @@ const TutorItem = ({ tutor }: TutorItemProps) => {
 
     if (ticket.unusedTickets <= 0) {
       dispatch(lessonBookingUiActions.openNoTicketAlert())
-      dispatch(lessonBookingActions.setBookingTutorId(null))
       return
     }
 
