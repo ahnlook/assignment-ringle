@@ -64,6 +64,8 @@ const lessonBookingSlice = createSlice({
         booking => booking.id === action.payload.id
       )
       state.bookingList.splice(index, 1)
+      state.selectedDate = null
+      state.selectedTutorId = null
     }
   }
 })
