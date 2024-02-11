@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { getHours, getMinutes } from 'date-fns'
+import { getMinutes } from 'date-fns'
 
 import { lessonBookingUiActions } from '../../store/lessonBookingUiSlice'
 import { lessonBookingActions } from '../../store/lessonBookingSlice'
 import { RootState } from '../../store'
 import ScheduleTooltip from './ScheduleTooltip'
 import ScheduleDeletionModal from '../Modal/ScheduleDeletionModal'
+import { formatTime, isFortyMinuteLessonOverlapping } from '../../utils/date'
 
 interface ScheduleBlockProps {
   date: Date
@@ -14,21 +15,21 @@ interface ScheduleBlockProps {
 
 const HalfHourBlock = ({ date, isFuture }: ScheduleBlockProps) => {
   const dispatch = useDispatch()
-  const hours = getHours(date)
+  const stringDate = date.toString()
+  const hoursAndMinutes = formatTime(stringDate)
   const minutes = getMinutes(date)
   const isOnTheHour = minutes === 0
 
   const { bookingList, selectedDate, selectedTicketId } = useSelector(
     (state: RootState) => state.lessonBooking
   )
-  const isTooltipVisible = selectedDate === date.toString()
+  const isTooltipVisible = selectedDate === stringDate
   const bookedLesson = bookingList.find(
-    booking =>
-      booking.date[0] === date.toString() || booking.date[1] === date.toString()
+    booking => booking.date[0] === stringDate || booking.date[1] === stringDate
   )
   const lessonStartDate = bookedLesson?.date[0]
-  const isLessonStart = lessonStartDate === date.toString()
-  const isLessonEnd = bookedLesson?.date[1] === date.toString()
+  const isLessonStart = lessonStartDate === stringDate
+  const isLessonEnd = bookedLesson?.date[1] === stringDate
 
   const selectedBookingTicket = useSelector((state: RootState) =>
     state.lessonTicket.tickets.find(
@@ -42,14 +43,7 @@ const HalfHourBlock = ({ date, isFuture }: ScheduleBlockProps) => {
     return selectedTicket?.durationMinutes
   })
   const isFortyMinuteLesson = currentLessonDuration === 40
-
-  const newDate = new Date(date)
-  const thirtyMinutesLater = new Date(
-    newDate.setMinutes(newDate.getMinutes() + 30)
-  ).toString()
-  const isScheduleOverlapping = isFortyMinuteLesson
-    ? bookingList.some(booking => booking.date[0] === thirtyMinutesLater)
-    : false
+  const isOverlapping = isFortyMinuteLessonOverlapping(stringDate, bookingList)
 
   const handleLessonTimeSelection = (date: Date) => {
     dispatch(lessonBookingActions.setBookingDate(date.toString()))
@@ -67,10 +61,10 @@ const HalfHourBlock = ({ date, isFuture }: ScheduleBlockProps) => {
       className={`relative h-7 min-h-7 flex justify-start border-t border-r border-gray-200 text-xs ${isFuture || 'bg-gray-200 bg-opacity-40 pointer-events-none'}`}
     >
       <ScheduleTooltip
-        className={`opacity-0 ${(isLessonEnd || isScheduleOverlapping) && 'pointer-events-none'} ${isLessonEnd || isScheduleOverlapping || 'hover:opacity-100'} ${isFortyMinuteLesson ? 'h-[46px]' : 'h-[18px]'}`}
+        className={`opacity-0 ${(isLessonEnd || isOverlapping) && 'pointer-events-none'} ${isLessonEnd || isOverlapping || 'hover:opacity-100'} ${isFortyMinuteLesson ? 'h-[46px]' : 'h-[18px]'}`}
         onClick={() => handleLessonTimeSelection(date)}
       >
-        {hours}:{minutes || '00'}
+        {hoursAndMinutes}
       </ScheduleTooltip>
       {isTooltipVisible && (
         <ScheduleTooltip
