@@ -7,13 +7,12 @@ import { RootState } from '../../store'
 import ScheduleTooltip from './ScheduleTooltip'
 import ScheduleDeletionModal from '../Modal/ScheduleDeletionModal'
 
-const HalfHourBlock = ({
-  date,
-  isFuture
-}: {
+interface ScheduleBlockProps {
   date: Date
   isFuture: boolean
-}) => {
+}
+
+const HalfHourBlock = ({ date, isFuture }: ScheduleBlockProps) => {
   const dispatch = useDispatch()
   const hours = getHours(date)
   const minutes = getMinutes(date)

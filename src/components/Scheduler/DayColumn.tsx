@@ -3,7 +3,11 @@ import { ko } from 'date-fns/locale'
 
 import HalfHourBlock from './HalfHourBlock'
 
-const DayColumn = ({ date }: { date: Date }) => {
+interface DayColumnProps {
+  date: Date
+}
+
+const DayColumn = ({ date }: DayColumnProps) => {
   const dayOfWeek = format(date, 'eee', { locale: ko })
   const dayOfMonth = format(date, 'd')
   const isToday = checkIsToday(date)

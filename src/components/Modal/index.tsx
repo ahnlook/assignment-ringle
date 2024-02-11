@@ -1,18 +1,17 @@
-import { useRef } from 'react'
+import { ReactNode, useRef } from 'react'
 import { createPortal } from 'react-dom'
 
 import Dimmed from './Dimmed'
 import useOutsideClick from '../../hooks/useOutsideClick'
 
-const Modal = ({
-  onClose,
-  children
-}: {
+interface ModalProps {
   onClose: () => void
-  children: React.ReactNode
-}) => {
+  children: ReactNode
+}
+
+const Modal = ({ onClose, children }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null)
-  useOutsideClick(modalRef, onClose)
+  useOutsideClick({ ref: modalRef, callback: onClose })
 
   return createPortal(
     <>

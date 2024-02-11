@@ -5,7 +5,11 @@ import { lessonBookingActions } from '../../store/lessonBookingSlice'
 import { lessonBookingUiActions } from '../../store/lessonBookingUiSlice'
 import { LessonTicket } from '../../type/lessonTicket'
 
-const LessonTicketItem = ({ ticket }: { ticket: LessonTicket }) => {
+interface LessonTicketItemProps {
+  ticket: LessonTicket
+}
+
+const LessonTicketItem = ({ ticket }: LessonTicketItemProps) => {
   const { id, type, name, remainingPeriods, unusedTickets } = ticket
   const dispatch = useDispatch()
   const isSelected = useSelector(

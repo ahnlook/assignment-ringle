@@ -6,7 +6,11 @@ import { RootState } from '../../store'
 import { Tutor } from '../../type/tutor'
 import { DateString, LessonDate } from '../../type/shared'
 
-const TutorItem = ({ tutor }: { tutor: Tutor }) => {
+interface TutorItemProps {
+  tutor: Tutor
+}
+
+const TutorItem = ({ tutor }: TutorItemProps) => {
   const { id, name, university, major, acceptanceRate, tag } = tutor
   const dispatch = useDispatch()
 
