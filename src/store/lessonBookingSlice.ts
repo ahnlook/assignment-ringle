@@ -43,8 +43,7 @@ const lessonBookingSlice = createSlice({
     },
     setBookingTicketId(state, action: PayloadAction<LessonTicket['id']>) {
       state.selectedTicketId = action.payload
-      state.selectedDate = null
-      state.selectedTutorId = null
+      resetSelectedState(state)
     },
     setBookingTutorId(state, action: PayloadAction<Tutor['id'] | null>) {
       state.selectedTutorId = action.payload
@@ -64,11 +63,15 @@ const lessonBookingSlice = createSlice({
         booking => booking.id === action.payload.id
       )
       state.bookingList.splice(index, 1)
-      state.selectedDate = null
-      state.selectedTutorId = null
+      resetSelectedState(state)
     }
   }
 })
+
+function resetSelectedState(state: lessonBookingState) {
+  state.selectedDate = null
+  state.selectedTutorId = null
+}
 
 export const lessonBookingActions = lessonBookingSlice.actions
 export default lessonBookingSlice
