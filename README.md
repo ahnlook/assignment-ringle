@@ -33,7 +33,7 @@ yarn dev
 
 ## 주요 구현 내용
 
-https://github.com/ahnlook/assignment-ringle/issues/1  
-https://github.com/ahnlook/assignment-ringle/issues/3  
-https://github.com/ahnlook/assignment-ringle/issues/5  
-https://github.com/ahnlook/assignment-ringle/issues/6
+- [x] [수업권 선택](https://github.com/ahnlook/assignment-ringle/issues/1)
+- [x] [헤더](https://github.com/ahnlook/assignment-ringle/issues/3)
+- [x] [수업 예약](https://github.com/ahnlook/assignment-ringle/issues/5)
+- [x] [예약 변경 및 취소](https://github.com/ahnlook/assignment-ringle/issues/6)
