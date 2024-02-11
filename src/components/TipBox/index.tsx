@@ -1,5 +1,6 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { lessonBookingUiActions } from '../../store/lessonBookingUiSlice'
+import { RootState } from '../../store'
 
 const TIPS = [
   '주 1회 이상 꾸준히 공부해야 영어 실력이 늘어요.',
@@ -12,10 +13,15 @@ const TipBox = () => {
   const randomIndex = Math.floor(Math.random() * TIPS.length)
   const randomTip = TIPS[randomIndex]
 
+  const { tipBoxIsVisible } = useSelector(
+    (state: RootState) => state.lessonBookingUi
+  )
+
   const handleTipBoxClose = () => {
     dispatch(lessonBookingUiActions.closeTipBox())
   }
 
+  if (!tipBoxIsVisible) return null
   return (
     <div className='flex justify-between items-center px-4 py-3 my-4 bg-purple-50 text-h-5 rounded-md text-nowrap'>
       <div>
