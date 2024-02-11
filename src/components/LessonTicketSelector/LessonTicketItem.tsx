@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { RootState } from '../../store'
 import { lessonBookingActions } from '../../store/lessonBookingSlice'
-import { lessonBookingUiActions } from '../../store/lessonBookingUiSlice'
 import { LessonTicket } from '../../type/lessonTicket'
 
 interface LessonTicketItemProps {
@@ -18,7 +17,6 @@ const LessonTicketItem = ({ ticket }: LessonTicketItemProps) => {
 
   const handleSelect = () => {
     dispatch(lessonBookingActions.setBookingTicketId(id))
-    dispatch(lessonBookingUiActions.closeLessonTicketModal())
   }
 
   return (

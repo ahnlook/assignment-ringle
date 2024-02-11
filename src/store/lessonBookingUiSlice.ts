@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { lessonBookingActions } from './lessonBookingSlice'
 
 const lessonBookingUiSlice = createSlice({
   name: 'lessonBookingUi',
@@ -30,6 +31,11 @@ const lessonBookingUiSlice = createSlice({
     closeScheduleDeletionAlert(state) {
       state.scheduleDeletionAlertIsVisible = false
     }
+  },
+  extraReducers: builder => {
+    builder.addCase(lessonBookingActions.setBookingTicketId, state => {
+      state.lessonTicketModalIsVisible = false
+    })
   }
 })
 
