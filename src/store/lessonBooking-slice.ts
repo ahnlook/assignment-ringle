@@ -43,6 +43,8 @@ const lessonBookingSlice = createSlice({
     },
     setBookingTicketId(state, action: PayloadAction<LessonTicket['id']>) {
       state.selectedTicketId = action.payload
+      state.selectedDate = null
+      state.selectedTutorId = null
     },
     setBookingTutorId(state, action: PayloadAction<Tutor['id'] | null>) {
       state.selectedTutorId = action.payload
