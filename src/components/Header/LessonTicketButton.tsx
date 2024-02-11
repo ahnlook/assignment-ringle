@@ -5,12 +5,12 @@ import { RootState } from '../../store'
 
 const LessonTicketButton = () => {
   const dispatch = useDispatch()
-  const selectedTicketId = useSelector(
-    (state: RootState) => state.lessonBooking.selectedTicketId
-  )
-  const selectedTicket = useSelector((state: RootState) =>
-    state.lessonTicket.tickets.find(ticket => ticket.id === selectedTicketId)
-  )
+  const selectedTicket = useSelector((state: RootState) => {
+    const selectedTicketId = state.lessonBooking.selectedTicketId
+    return state.lessonTicket.tickets.find(
+      ticket => ticket.id === selectedTicketId
+    )
+  })
 
   const handleClick = () => {
     dispatch(lessonBookingUiActions.openLessonTicketModal())
@@ -19,7 +19,7 @@ const LessonTicketButton = () => {
   return (
     <button
       className='min-w-[360px] max-h-10 flex items-center justify-between px-4 py-2 bg-white text-sm border border-gray-300 rounded-md'
-      onClick={() => handleClick()}
+      onClick={handleClick}
     >
       <div className='flex items-center gap-x-2'>
         <div className='px-2 bg-green-500 text-green-600 text-xs rounded'>
