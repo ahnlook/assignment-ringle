@@ -3,6 +3,7 @@ import { addDays } from 'date-fns'
 
 import { RootState } from '../../store'
 import DayColumn from './DayColumn'
+import TimeColumn from './TimeColumn'
 
 const WeeklyScheduler = () => {
   const week = useSelector(
@@ -13,6 +14,7 @@ const WeeklyScheduler = () => {
 
   return (
     <div className='w-full flex overflow-scroll'>
+      <TimeColumn />
       {days.map((date, index) => (
         <DayColumn key={index} date={date} />
       ))}
