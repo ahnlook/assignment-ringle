@@ -29,15 +29,23 @@ const TimeDisplay = ({ date }: TimeDisplayProps) => {
   })
   const isLessonEnd = bookedLesson?.date[1] === date
   const isFortyMinuteLesson = currentLessonDuration === 40
+  const isTimeLimit = isFortyMinuteLesson && hoursAndMinutes === '23:30'
   const isOverlapping = isFortyMinuteLessonOverlapping(date, bookingList)
 
   const handleLessonTimeSelection = (date: DateString) => {
     dispatch(lessonBookingActions.setBookingDate(date.toString()))
   }
 
+  const isClickable = !isLessonEnd && !isOverlapping && !isTimeLimit
+  const hoverEffect = isClickable ? 'hover:opacity-100' : 'pointer-events-none'
+  const heightStyle = isFortyMinuteLesson ? 'h-[46px]' : 'h-[18px]'
+  const baseStyle = 'opacity-0'
+
+  const tooltipClasses = `${baseStyle} ${hoverEffect} ${heightStyle}`
+
   return (
     <Tooltip
-      className={`opacity-0 ${(isLessonEnd || isOverlapping) && 'pointer-events-none'} ${isLessonEnd || isOverlapping || 'hover:opacity-100'} ${isFortyMinuteLesson ? 'h-[46px]' : 'h-[18px]'}`}
+      className={tooltipClasses}
       onClick={() => handleLessonTimeSelection(date)}
     >
       {hoursAndMinutes}
