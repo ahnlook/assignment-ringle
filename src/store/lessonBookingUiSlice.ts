@@ -35,7 +35,10 @@ const lessonBookingUiSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(lessonBookingActions.setBookingTicketId, state => {
       state.lessonTicketModalIsVisible = false
-    })
+    }),
+      builder.addCase(lessonBookingActions.cancelBooking, state => {
+        state.scheduleDeletionAlertIsVisible = false
+      })
   }
 })
 

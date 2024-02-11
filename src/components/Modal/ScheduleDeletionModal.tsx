@@ -15,26 +15,23 @@ interface ScheduleDeletionModalProps {
 
 const ScheduleDeletionModal = ({ schedule }: ScheduleDeletionModalProps) => {
   const dispatch = useDispatch()
-
   const isOpen = useSelector(
     (state: RootState) => state.lessonBookingUi.scheduleDeletionAlertIsVisible
   )
-
   const lessonBooking = useSelector((state: RootState) =>
     state.lessonBooking.bookingList.find(booking => booking.id === schedule.id)
   )
-
-  const tutor = useSelector((state: RootState) =>
-    state.tutor.tutors.find(tutor => tutor.id === lessonBooking?.tutorId)
+  const tutorName = useSelector(
+    (state: RootState) =>
+      state.tutor.tutors.find(tutor => tutor.id === lessonBooking?.tutorId)
+        ?.name
   )
 
   const handleClose = () => {
     dispatch(lessonBookingUiActions.closeScheduleDeletionAlert())
   }
-
-  const handleLessonCancel = (schedule: LessonBooking) => {
+  const handleLessonCancel = () => {
     dispatch(lessonBookingActions.cancelBooking(schedule))
-    handleClose()
   }
 
   if (!isOpen) return null
@@ -47,7 +44,7 @@ const ScheduleDeletionModal = ({ schedule }: ScheduleDeletionModalProps) => {
               locale: ko
             })}
         </div>
-        <div>{tutor?.name}</div>
+        <div>{tutorName}</div>
         <div>이 수업을 삭제하시겠습니까?</div>
         <div className='flex justify-end gap-x-2 mt-6'>
           <Button
@@ -56,7 +53,7 @@ const ScheduleDeletionModal = ({ schedule }: ScheduleDeletionModalProps) => {
           >
             취소
           </Button>
-          <Button onClick={() => handleLessonCancel(schedule)}>확인</Button>
+          <Button onClick={() => handleLessonCancel()}>확인</Button>
         </div>
       </div>
     </Modal>
