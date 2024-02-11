@@ -4,7 +4,7 @@ import { lessonBookingUiActions } from '../../store/lessonBookingUiSlice'
 import { lessonBookingActions } from '../../store/lessonBookingSlice'
 import { RootState } from '../../store'
 import { Tutor } from '../../type/tutor'
-import { DateString, LessonDate } from '../../type/shared'
+import { calculateLessonDate } from '../../utils/date'
 
 interface TutorItemProps {
   tutor: Tutor
@@ -27,20 +27,7 @@ const TutorItem = ({ tutor }: TutorItemProps) => {
   const isSelected = selectedTutorId === id
 
   const onTutorClick = () => {
-    if (!date) return
-    if (!ticketId) return
-    if (!ticket) return
-
-    const lessonDate = (date: DateString): LessonDate => {
-      if (ticket.durationMinutes === 40) {
-        const start = new Date(date)
-        const end = new Date(
-          start.setMinutes(start.getMinutes() + 30)
-        ).toString()
-        return [date, end]
-      }
-      return [date]
-    }
+    if (!date || !ticketId || !ticket) return
 
     if (selectedTutorId) {
       dispatch(
@@ -59,7 +46,7 @@ const TutorItem = ({ tutor }: TutorItemProps) => {
 
     dispatch(
       lessonBookingActions.booking({
-        date: lessonDate(date),
+        date: calculateLessonDate(date, ticket.durationMinutes),
         ticketId,
         tutorId: id
       })
