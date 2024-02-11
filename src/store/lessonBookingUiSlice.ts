@@ -6,8 +6,7 @@ const lessonBookingUiSlice = createSlice({
   initialState: {
     lessonTicketModalIsVisible: true,
     tipBoxIsVisible: true,
-    noTicketAlertIsVisible: false,
-    scheduleDeletionAlertIsVisible: false
+    noTicketAlertIsVisible: false
   },
   reducers: {
     openLessonTicketModal(state) {
@@ -24,21 +23,12 @@ const lessonBookingUiSlice = createSlice({
     },
     closeNoTicketAlert(state) {
       state.noTicketAlertIsVisible = false
-    },
-    openScheduleDeletionAlert(state) {
-      state.scheduleDeletionAlertIsVisible = true
-    },
-    closeScheduleDeletionAlert(state) {
-      state.scheduleDeletionAlertIsVisible = false
     }
   },
   extraReducers: builder => {
     builder.addCase(lessonBookingActions.setBookingTicketId, state => {
       state.lessonTicketModalIsVisible = false
-    }),
-      builder.addCase(lessonBookingActions.cancelBooking, state => {
-        state.scheduleDeletionAlertIsVisible = false
-      })
+    })
   }
 })
 

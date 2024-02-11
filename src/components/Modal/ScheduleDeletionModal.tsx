@@ -1,46 +1,39 @@
+import { useDispatch, useSelector } from 'react-redux'
 import { format } from 'date-fns'
 import { ko } from 'date-fns/locale'
 
+import { lessonBookingActions } from '../../store/lessonBookingSlice'
+import { RootState } from '../../store'
 import Modal from '.'
 import Button from '../Button'
 import { LessonBooking } from '../../type/lessonBooking'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../store'
-import { lessonBookingActions } from '../../store/lessonBookingSlice'
-import { lessonBookingUiActions } from '../../store/lessonBookingUiSlice'
 
 interface ScheduleDeletionModalProps {
   schedule: LessonBooking
+  onClose: () => void
 }
 
-const ScheduleDeletionModal = ({ schedule }: ScheduleDeletionModalProps) => {
+const ScheduleDeletionModal = ({
+  schedule,
+  onClose
+}: ScheduleDeletionModalProps) => {
   const dispatch = useDispatch()
-  const isOpen = useSelector(
-    (state: RootState) => state.lessonBookingUi.scheduleDeletionAlertIsVisible
-  )
-  const lessonBooking = useSelector((state: RootState) =>
-    state.lessonBooking.bookingList.find(booking => booking.id === schedule.id)
-  )
   const tutorName = useSelector(
     (state: RootState) =>
-      state.tutor.tutors.find(tutor => tutor.id === lessonBooking?.tutorId)
-        ?.name
+      state.tutor.tutors.find(tutor => tutor.id === schedule?.tutorId)?.name
   )
 
-  const handleClose = () => {
-    dispatch(lessonBookingUiActions.closeScheduleDeletionAlert())
-  }
-  const handleLessonCancel = () => {
+  const handleLessonCancel = (schedule: LessonBooking) => {
     dispatch(lessonBookingActions.cancelBooking(schedule))
+    onClose()
   }
 
-  if (!isOpen) return null
   return (
-    <Modal onClose={handleClose}>
+    <Modal onClose={onClose}>
       <div className='flex flex-col gap-y-2'>
         <div>
-          {lessonBooking &&
-            format(lessonBooking.date[0], 'M월 d일(E) HH:mm', {
+          {schedule &&
+            format(schedule.date[0], 'M월 d일(E) HH:mm', {
               locale: ko
             })}
         </div>
@@ -48,12 +41,12 @@ const ScheduleDeletionModal = ({ schedule }: ScheduleDeletionModalProps) => {
         <div>이 수업을 삭제하시겠습니까?</div>
         <div className='flex justify-end gap-x-2 mt-6'>
           <Button
-            className='bg-white text-purple-800 border border-purple-800'
-            onClick={handleClose}
+            className='border border-purple-800 bg-white text-black'
+            onClick={onClose}
           >
             취소
           </Button>
-          <Button onClick={() => handleLessonCancel()}>확인</Button>
+          <Button onClick={() => handleLessonCancel(schedule)}>확인</Button>
         </div>
       </div>
     </Modal>
