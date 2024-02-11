@@ -14,13 +14,13 @@ const Button = ({
 }: ButtonProps) => {
   const disabledStyles = isDisabled
     ? 'bg-gray-200 text-gray-300 pointer-events-none'
-    : ''
+    : 'bg-purple-500 text-white'
 
   return (
     <button
-      className={`w-[150px] min-h-[42px] p-2.5 bg-purple-500 text-white text-[14px] rounded ${disabledStyles} ${className}`}
-      {...rest}
+      className={`w-[150px] min-h-[42px] p-2.5 text-[14px] rounded ${disabledStyles} ${className}`}
       disabled={isDisabled}
+      {...rest}
     >
       {children}
     </button>
