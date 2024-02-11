@@ -9,7 +9,7 @@ const WeeklyScheduler = () => {
   const week = useSelector(
     (state: RootState) => state.lessonScheduler.currentWeek
   )
-  const startDate = new Date(week.from ?? new Date())
+  const startDate = week.from ? new Date(week.from) : new Date()
   const days = Array.from({ length: 7 }, (_, i) => addDays(startDate, i))
 
   return (
