@@ -30,11 +30,14 @@ const lessonTicketSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(lessonBookingActions.booking, (state, action) => {
-      const { ticketId } = action.payload
-      const usedTicket = state.tickets.find(ticket => ticket.id === ticketId)
-      if (usedTicket) usedTicket.unusedTickets--
-    }),
+    builder.addCase(
+      lessonBookingActions.booking,
+      (state, action: PayloadAction<LessonBooking>) => {
+        const { ticketId } = action.payload
+        const usedTicket = state.tickets.find(ticket => ticket.id === ticketId)
+        if (usedTicket) usedTicket.unusedTickets--
+      }
+    ),
       builder.addCase(
         lessonBookingActions.cancelBooking,
         (state, action: PayloadAction<LessonBooking>) => {

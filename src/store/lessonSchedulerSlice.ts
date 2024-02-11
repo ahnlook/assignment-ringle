@@ -1,5 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { endOfWeek, startOfWeek } from 'date-fns'
+
+import { DateString } from '../type/shared'
 
 const weekRange = (day: Date) => ({
   from: startOfWeek(day, { weekStartsOn: 0 }).toString(),
@@ -14,8 +16,8 @@ const lessonSchedulerSlice = createSlice({
   name: 'lessonScheduler',
   initialState,
   reducers: {
-    setCurrentWeek(state, action) {
-      state.currentWeek = weekRange(action.payload)
+    setCurrentWeek(state, action: PayloadAction<DateString>) {
+      state.currentWeek = weekRange(new Date(action.payload))
     }
   }
 })
